@@ -1,70 +1,255 @@
-# Getting Started with Create React App
+# 🏷️ RFID Stock - Sistema de Gestión de Activos Retornables
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sistema moderno de gestión de inventario con tecnología RFID para control de activos retornables (Charolas y Tarimas).
 
-## Available Scripts
+![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)
+![React](https://img.shields.io/badge/React-19.2.0-61dafb.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
 
-In the project directory, you can run:
+---
+
+## 📋 Tabla de Contenidos
+
+- [Características](#-características)
+- [Tecnologías](#-tecnologías)
+- [Instalación](#-instalación)
+- [Uso](#-uso)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Modelo de Datos](#-modelo-de-datos)
+- [Próximos Pasos](#-próximos-pasos)
+
+---
+
+## ✨ Características
+
+### Funcionalidades Principales:
+
+- ✅ **Gestión de Activos Retornables**
+  - Alta de Charolas (Tipo A y B)
+  - Alta de Tarimas
+  - Edición y eliminación de activos
+
+- ✅ **Dashboard en Tiempo Real**
+  - Contador de inventario
+  - Activos en tránsito
+  - Activos en uso
+  - Cálculo de pérdidas
+
+- ✅ **Persistencia de Datos**
+  - LocalStorage automático
+  - Recuperación al recargar
+  - Sin necesidad de backend
+
+- ✅ **Interfaz Moderna**
+  - Diseño responsive
+  - Animaciones suaves
+  - Feedback visual
+
+- ✅ **Validaciones Robustas**
+  - Formularios validados
+  - Confirmaciones de acciones
+  - Prevención de errores
+
+---
+
+## 🛠️ Tecnologías
+
+- **Frontend:** React 19.2.0
+- **Estilos:** CSS3 + Tailwind-like utilities
+- **Persistencia:** LocalStorage API
+- **Build Tool:** Create React App
+- **Control de Versiones:** Git
+
+---
+
+## 🚀 Instalación
+
+### Prerrequisitos:
+- Node.js 14+ 
+- npm 6+
+
+### Pasos:
+
+1. **Clonar el repositorio:**
+```bash
+git clone <repository-url>
+cd rfid-stock
+```
+
+2. **Instalar dependencias:**
+```bash
+npm install
+```
+
+3. **Iniciar el servidor de desarrollo:**
+```bash
+npm start
+```
+
+4. **Abrir en el navegador:**
+```
+http://localhost:3000
+```
+
+---
+
+## 💡 Uso
+
+### Alta de Activos:
+
+1. Click en el botón **"Alta"** en el header
+2. Completar el formulario:
+   - **Código RFID:** Identificador único
+   - **Tipo de Activo:** Charola o Tarima
+   - **Tipo de Charola:** A o B (solo si es charola)
+   - **Responsable:** Nombre del encargado
+3. Click en **"Registrar Activo"**
+
+### Gestión de Activos:
+
+- **Ver lista:** Scroll en la tabla de activos
+- **Editar:** Click en "Editar" en la fila del activo
+- **Eliminar:** Click en "Eliminar" (requiere confirmación)
+
+### Reset del Sistema:
+
+- Click en el botón **"Reset"** (rojo) en el header
+- Confirmar la acción
+- ⚠️ **Advertencia:** Esta acción elimina todos los datos
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+rfid-stock/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx          # Barra de navegación
+│   │   ├── Dashboard.jsx       # Métricas del sistema
+│   │   ├── AssetModal.jsx      # Modal de alta/edición
+│   │   ├── AssetList.jsx       # Tabla de activos
+│   │   └── RFIDReader.jsx      # Configuración RFID
+│   ├── hooks/
+│   │   └── useLocalStorage.js  # Hook de persistencia
+│   ├── App.js                  # Componente principal
+│   ├── App.css                 # Estilos principales
+│   ├── index.js                # Punto de entrada
+│   └── index.css               # Estilos globales
+├── ESTADO_ACTUAL.md            # Estado del proyecto
+├── CAMBIOS_IMPLEMENTADOS.md    # Log de cambios
+├── RESUMEN_IMPLEMENTACION.md   # Resumen ejecutivo
+├── package.json
+└── README.md
+```
+
+---
+
+## 📊 Modelo de Datos
+
+### Estructura de Activo:
+
+```javascript
+{
+  id: "1733328000000",           // Timestamp único
+  rfid: "RFID-001",              // Código RFID
+  tipoActivo: "charola",         // "charola" | "tarima"
+  tipoCharola: "A",              // "A" | "B" | null
+  responsable: "Juan Pérez",     // Nombre del responsable
+  estado: "Inventario",          // Estado actual
+  ubicacion: "Bodega Principal", // Ubicación física
+  fechaRegistro: "2025-12-04",   // ISO Date
+  valorEstimado: 200             // Valor en pesos
+}
+```
+
+### Estados Posibles:
+- `Inventario` - En bodega
+- `En Tránsito` - En movimiento
+- `En Uso` - Asignado
+- `Perdido` - Extraviado
+
+### Tipos de Activos:
+- **Charola Tipo A** - Valor: $200
+- **Charola Tipo B** - Valor: $200
+- **Tarima** - Valor: $500
+
+---
+
+## 🎯 Próximos Pasos
+
+### 🔥 Alta Prioridad:
+
+- [ ] Integración RFID real con lector
+- [ ] Modal de edición de activos
+- [ ] Búsqueda y filtros en tabla
+- [ ] Notificaciones toast
+
+### 📈 Media Prioridad:
+
+- [ ] Historial de movimientos
+- [ ] Exportación a CSV/Excel
+- [ ] Validación de RFIDs duplicados
+- [ ] Gráficos y reportes
+
+### 🌟 Baja Prioridad:
+
+- [ ] Backend API (Node.js)
+- [ ] Base de datos (MongoDB/PostgreSQL)
+- [ ] Autenticación de usuarios
+- [ ] Modo oscuro
+
+---
+
+## 📝 Scripts Disponibles
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Inicia el servidor de desarrollo en modo watch.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ejecuta los tests en modo interactivo.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Crea el build de producción optimizado.
 
 ### `npm run eject`
+⚠️ **Operación irreversible.** Expone la configuración de webpack.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🤝 Contribución
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📄 Licencia
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Este proyecto es privado y de uso interno.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 👥 Contacto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Proyecto:** RFID Stock  
+**Versión:** 0.2.0  
+**Última Actualización:** 2025-12-04
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📚 Documentación Adicional
 
-### Making a Progressive Web App
+- [Estado Actual](./ESTADO_ACTUAL.md) - Estado detallado del proyecto
+- [Cambios Implementados](./CAMBIOS_IMPLEMENTADOS.md) - Log de cambios técnicos
+- [Resumen de Implementación](./RESUMEN_IMPLEMENTACION.md) - Resumen ejecutivo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Hecho con ❤️ para la gestión eficiente de activos retornables**
