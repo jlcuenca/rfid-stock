@@ -127,6 +127,7 @@ const [assets, setAssets] = useLocalStorage('rfid-assets', []);
 
 - ✅ Creación de flujo de trabajo `.github/workflows/deploy.yml` para despliegue automático en GitHub Pages.
 - ✅ Solución a problemas de verificación manual de PRs.
+- ✅ Cambio de `npm ci` a `npm install` en workflow para mayor robustez en dependencias.
 
 ---
 
