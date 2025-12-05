@@ -48,35 +48,35 @@ const useRFIDScanner = (onScan, enabled = true) => {
                 return;
             }
 
-            // Tab o Enter finalizan un código
-            if (event.key === 'Tab' || event.key === 'Enter') {
+            // Teclas delimitadoras comunes en lectores RFID
+            if (event.key === 'Tab' || event.key === 'Enter' || event.key === ';') {
                 event.preventDefault();
 
-                // Procesar el código actual del buffer
+                // Procesar lo que hay en el buffer
                 if (bufferRef.current) {
                     processCode(bufferRef.current);
                     bufferRef.current = '';
                 }
 
-                // Limpiar timeout anterior
+                // Reiniciar el temporizador para finalizar el lote
                 if (timeoutRef.current) {
                     clearTimeout(timeoutRef.current);
                 }
 
-                // Esperar 300ms para ver si vienen más códigos
+                // Esperar un poco más (500ms) por si es un flujo continuo de múltiples tags
                 timeoutRef.current = setTimeout(() => {
                     finalizeScan();
-                }, 300);
+                }, 500);
 
                 return;
             }
 
-            // Ignorar teclas especiales
+            // Ignorar otras teclas especiales que no sean Backspace
             if (event.key.length > 1 && event.key !== 'Backspace') {
                 return;
             }
 
-            // Backspace
+            // Manejo de Backspace
             if (event.key === 'Backspace') {
                 bufferRef.current = bufferRef.current.slice(0, -1);
                 return;
@@ -84,6 +84,20 @@ const useRFIDScanner = (onScan, enabled = true) => {
 
             // Agregar carácter al buffer
             bufferRef.current += event.key;
+
+            // También reiniciamos el timeout al escribir, para mantener el lote "vivo" 
+            // mientras entran datos muy rápido
+            if (timeoutRef.current) {
+                clearTimeout(timeoutRef.current);
+            }
+            timeoutRef.current = setTimeout(() => {
+                if (bufferRef.current) {
+                    // Si quedó algo en el buffer tras el timeout (ej. último código sin Enter)
+                    processCode(bufferRef.current);
+                    bufferRef.current = '';
+                }
+                finalizeScan();
+            }, 500);
         };
 
         window.addEventListener('keydown', handleKeyDown);
