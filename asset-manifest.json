@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rfid-stock/static/css/main.d5e6b23a.css",
+    "main.js": "/rfid-stock/static/js/main.4b8c4a5b.js",
+    "static/js/453.909f094b.chunk.js": "/rfid-stock/static/js/453.909f094b.chunk.js",
+    "index.html": "/rfid-stock/index.html",
+    "main.d5e6b23a.css.map": "/rfid-stock/static/css/main.d5e6b23a.css.map",
+    "main.4b8c4a5b.js.map": "/rfid-stock/static/js/main.4b8c4a5b.js.map",
+    "453.909f094b.chunk.js.map": "/rfid-stock/static/js/453.909f094b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5e6b23a.css",
+    "static/js/main.4b8c4a5b.js"
+  ]
+}
