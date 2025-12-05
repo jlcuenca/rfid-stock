@@ -123,7 +123,13 @@ const [assets, setAssets] = useLocalStorage('rfid-assets', []);
 - ✅ Estados vacíos con mensajes informativos
 - ✅ Badges de color según tipo de activo
 
+### 6. **CI/CD**
+
+- ✅ Creación de flujo de trabajo `.github/workflows/deploy.yml` para despliegue automático en GitHub Pages.
+- ✅ Solución a problemas de verificación manual de PRs.
+
 ---
+
 
 ## 📁 Nueva Estructura del Proyecto
 
