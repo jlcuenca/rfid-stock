@@ -12,7 +12,7 @@ import useRFIDScanner from './hooks/useRFIDScanner';
 const App = () => {
   // Estado persistente con LocalStorage
   const [assets, setAssets] = useLocalStorage('rfid-assets', []);
-  const [movements, setMovements] = useLocalStorage('rfid-movements', []);
+  const [, setMovements] = useLocalStorage('rfid-movements', []);
 
   // Estado local
   const [isModalOpen, setIsModalOpen] = useState(false);
